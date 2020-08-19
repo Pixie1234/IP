@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function dodadi() {
+            var container = document.getElementById('container');
+
+            //kreirame div i sekoj input i button ni se u nov zaednicki div
+            var div = document.createElement("div");
+            container.appendChild(div);
+
+            //sega go kreirame text poleto
+            var input = document.createElement('input');
+            input.setAttribute('type', 'text');
+//posto imame poveke takvi stavame klasa za da moze sekoja vrednost posel da ja zememe od inputot za da presmetame
+            input.setAttribute('class', "pole");
+            div.appendChild(input);
+
+            //kreirame button
+            var button = document.createElement('input');
+            button.setAttribute('type', "button");
+            button.setAttribute('value', 'Izbirsi');
+
+            button.setAttribute('onclick', 'izbrisi(this)');
+            div.appendChild(button);
+
+            //
+        }
+
+        function izbrisi(btn) {
+            console.log(btn);
+            btn.parentNode.remove();
+        }
+
+        function presmetaj() {
+            var broj = document.getElementsByClassName("pole");
+            //oti e klasa ni treba sekogas for loop za da zememe value!!!!
+            //console.log(broj);
+            //loop ode go broj.length
+            //console.log(broj.length);
+            // console.log(broj.value);
+            var min = 99999999;
+            var max = 0;
+            var suma = 0.0;
+            //??? zaso ni e niza???
+            //za da videmem kolku imame vneseni elementi za da posle go podeleme so niza.length(brojo na elementi u nizata)
+            var niza = [];
+
+
+            for (let i = 0; i < broj.length; i++) {
+                //console.log(broj[i].value);
+                if (broj[i].value != undefined) {
+                    niza.push(parseInt(broj[i].value[i]));
+                    //za suma mora da e tuka so .value oti onaka dava NaN
+                    suma = parseInt(suma) + parseInt(broj[i].value);
+                    if (broj[i].value > max) {
+                        max = parseInt(broj[i].value);
+                    }
+                    if (broj[i].value < min) {
+                        min = parseInt(broj[i].value);
+                    }
+                }
+            }
+            var prosek = suma / niza.length;
+            /*console.log(niza.length);
+            console.log(prosek);
+            console.log(min);
+            console.log(max);
+            console.log(suma);*/
+
+
+            document.getElementById('prosek').innerHTML = prosek.toFixed(2);
+            document.getElementById('max').innerHTML=max;
+            document.getElementById('min').innerHTML=min;
+        }
+    </script>
+</head>
+<body>
+<div>
+    <input class="pole" type="text"><button onclick="izbrisi(this)">Izbrisi</button>
+</div>
+<div id="container"></div>
+<button onclick="dodadi()">Dodadi</button><br>
+<button onclick="presmetaj()">Presmetaj</button><br>
+<div>
+    <label>Prosek: <span id="prosek"></span></label><br>
+    <label>Max: <span id="max"></span></label><br>
+    <label>Min: <span id="min"></span></label><br>
+</div>
+</body>
+</html>
