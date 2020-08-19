@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        td,th {
+            border: solid black 1px;
+
+        }
+    </style>
+    <script>
+        function importRow() {
+
+            var name = document.getElementById('name');
+            var index = document.getElementById('index').value;
+            var phone = document.getElementById('phone').value;
+            var session = document.getElementById('session').value;
+            var grade = document.getElementsByClassName("radio");
+            console.log(grade.length);
+
+            var grade2 = '';
+            for (let i = 0; i < grade.length; i++) {
+                if (grade[i].checked) {
+                    //console.log(grade[i].value);
+                    grade2 = grade[i].value;
+                }
+            }
+
+            if (name.value == "" || index == "" || phone == "" || session == "" || grade2 == "") {
+                alert("site polinja ne se popolneti");
+                return;
+
+            }
+
+            var tableRef = document.getElementById('table').getElementsByTagName('tbody')[0];
+// length oti posle posledniot row so e kreiran da se kreira nov row (row e horizontalno)
+            var newRow = tableRef.insertRow(tableRef.rows.length);
+            //na toj nov red so e veke kreiran dodaj nova kelija
+            var cellName = newRow.insertCell();
+            var cellIndex = newRow.insertCell();
+            var cellPhone = newRow.insertCell();
+            var cellGrade = newRow.insertCell();
+
+//stavame klasa na kelijata, ke ni treba za posle da ja zememe vrednosta za da presmetame suma
+            cellGrade.setAttribute('class', "grades");
+
+            var cellSession = newRow.insertCell();
+            var cellActions = newRow.insertCell();
+
+//            var broj1 = phone.charAt(0) + phone.charAt(1) + phone.charAt(2) + "/" + phone.charAt(03) + phone.charAt(4) + phone.charAt(5) + "-" + phone.charAt(6) + phone.charAt(7) + phone.charAt(8);
+            var broj = phone.slice(0, 3) + "/" + phone.slice(3, 6) + "-" + phone.slice(6);
+            console.log(broj);
+            cellName.innerHTML = name.value;
+            cellIndex.innerHTML = index;
+            cellPhone.innerHTML = broj;
+            cellGrade.innerHTML = grade2;
+            cellSession.innerHTML = session;
+            cellActions.innerHTML = "<button onclick='confirm(this)'>Confirm</button> <button class='btn2' onclick='revert(this)'>Revert</button>";
+
+            name.value = "";
+            index = "";
+            phone = "";
+            session = "";
+            grade2.value = "";
+            grade.value = '';
+            suma();
+        }
+
+        function confirm(btn1) {
+            console.log(btn1);
+            var tr = btn1.parentNode.parentNode;
+            tr.style.backgroundColor = 'lightgreen';
+            btn1.disabled = true;
+            btn1.parentNode.lastChild.disabled = true;
+
+        }
+
+        function revert(btn2) {
+            //console.log(btn2);
+             var tr= btn2.parentNode.parentNode;
+           // tr.remove(tr);
+            var text = tr.childNodes[1].innerHTML + " - grade " + tr.childNodes[3].innerHTML;
+            //console.log(text);
+            var lista= document.getElementById('lista');
+            var li = document.createElement('li');
+            li.innerHTML=text;
+            lista.appendChild(li);
+            suma();
+        }
+
+        function suma() {
+            var average= document.getElementById('average');
+            var gradeCells = document.getElementsByClassName('grades');
+            var sum = 0.0;
+            for(var i=0; i<gradeCells.length; i++){
+                sum += parseInt(gradeCells[i].innerHTML);
+            }
+            console.log(sum);
+            average.innerHTML = sum / gradeCells.length;
+        }
+    </script>
+</head>
+<body>
+<h2>Details</h2>
+<div><label>Name</label><input id="name" type="text"></div>
+<div><label>Index</label><input id="index" type="text"></div>
+<div><label>Phone</label><input id="phone" type="text"></div>
+<div><label>Grade</label>
+<!--Mora da staeme value za da posle moze da ja zememe vrednosta so javascript-->
+<input class="radio" type="radio" value="5">5
+<input class="radio" type="radio"value="6">6
+<input class="radio" type="radio"value="7">7
+<input class="radio" type="radio"value="8">8
+<input class="radio" type="radio"value="9">9
+<input class="radio" type="radio"value="10">10
+</div>
+<div>
+    <label>Session</label>
+    <select id="session">
+        <option></option>
+        <option>January</option>
+        <option>June</option>
+        <option>September</option>
+    </select>
+</div>
+<br>
+<button onclick="importRow()">Import Student</button>
+<h3>Students (average grade: <span id="average"> </span> )</h3>
+<table id="table">
+    <thead>
+    <th>Name</th>
+    <th>Index</th>
+    <th>Phone</th>
+    <th>Grade</th>
+    <th>Session</th>
+    <th>Actions</th>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+
+<h3>Revert history</h3>
+<ul id="lista">
+
+</ul>
+</body>
+</html>
