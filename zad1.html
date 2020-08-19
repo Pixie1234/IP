@@ -1,0 +1,34 @@
+<!--Задача 1
+Да се напише функција во JavaScript која како аргумент прима листа, а како резултат ја враќа листата
+каде се избришани дупликатите.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function izbrisiDulikati(lista) {
+            var broj = document.getElementById("broj").value;
+            //console.log(broj.length);
+
+            //console.log(broj %10);
+            var niza = [];
+            var nizaBezDuplikati = [];
+
+            for (let i = 0; i <broj.length ; i++) {
+                if (niza.indexOf(broj[i]) == -1) {
+                    niza.push(broj[i]);
+                    console.log(broj[i]);
+                }
+            }
+            console.log(niza);
+            //console.log(nizaBezDuplikati);
+        }
+    </script>
+    
+</head>
+<body>
+<input type="text" id="broj">
+<button onclick="izbrisiDulikati()">Click</button>
+</body>
+</html>
