@@ -1,0 +1,46 @@
+<!--Vnesi vi input poleto Eden, dva , tri.. i ke se kreirat tolku polinja
+od izbereniot tip so tekstot do niv napisan --><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function prikazi() {
+            var input=document.getElementById("number").value;
+            console.log(input);
+           var niza = input.split(",");
+            console.log(niza.length);
+            var type = document.getElementById('type').value;
+            console.log(type);
+            var container= document.getElementById('container');
+
+//pri sekoj loop treba nov element da se kriera zatoa u loop go kreirame isto elemetot
+            for (let i = 0; i <niza.length ; i++) {
+                var elem = document.createElement("input");
+                elem.setAttribute('type', type);
+                //console.log(niza[i]);
+                var text = document.createTextNode(niza[i]);
+                console.log(text);
+                container.appendChild(elem);
+                container.appendChild(text);
+
+            }
+
+
+
+
+        }
+    </script>
+</head>
+<body>
+<label>items:</label>
+<input type="text" id="number"><br>
+<label>Type:</label>
+<select id="type">
+    <option>Radio</option>
+    <option>Checkbox</option>
+</select><br>
+<button onclick="prikazi()">Prikazi</button>
+<div id="container"></div>
+</body>
+</html>
