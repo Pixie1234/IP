@@ -1,0 +1,39 @@
+<!--Да се напише функција во JavaScript која како аргумент прима листа и елемент. Функцијата треба да
+врати нова листа, каде дадениот елемент е избришан од оригиналната листа:
+Пример:
+console.log(remove_array_element([2, 5, 9, 6], 5));
+[2, 9, 6]
+--><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function izbrisiElement(lista, elem) {
+            //var broj = document.getElementById("broj").value;
+
+            var niza = [];
+            console.log(lista.length);//ako ima 5 cifri ke vrate 5
+
+            for (let i = 0; i < lista.length; i++) {
+                if (lista[i] !== elem) {
+                    niza.push(lista[i]);
+                } else if (lista[i]===elem) {
+                    continue;
+                }
+            }
+            console.log(niza);
+            return niza;
+        }
+
+        lista = izbrisiElement([2, 3, 4, 5, 9, 5 ], 5);
+        lista1 = izbrisiElement([2, 5, 9, 6], 5);
+        //document.write(lista.toString());
+        //console.log(izbrisiElement([2, 3, 4, 5, 5, 9], 5));
+    </script>
+</head>
+<body>
+<input type="text" id="broj">
+<button onclick="izbrisiElement()">Click</button>
+</body>
+</html>
