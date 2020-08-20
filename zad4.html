@@ -1,0 +1,49 @@
+<!--Кога е избрано color во полето value се внесува боја и со притискање на копчето „Промени“
+позадината се менува во избраната боја. Ако е избрано Image тогаш во полето value се
+внесува url од некоја слика и со притискање на копчето „Промени“ таа слика се поставува за
+позадина-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function promeni() {
+            var pozadina = document.getElementsByClassName('type');
+            console.log(pozadina.length);
+            var boja = document.getElementById('boja').value;
+            console.log(boja);
+            var div= document.getElementById('background');
+
+            var pozadina2 = "";
+            for (let i = 0; i <pozadina.length ; i++) {
+                if (pozadina[i].checked) {
+                    pozadina2 = pozadina[i].value;
+                }
+            }
+            console.log(pozadina2);
+            if (pozadina2 === "color") {
+                //console.log("yes");
+                div.style.backgroundColor = boja;
+            }
+            else if (pozadina2 === "image") {
+                div.style.backgroundColor = 'white';
+                div.style.backgroundImage = "url('" + boja + "')";
+                console.log(boja);
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="background">
+<h1>Promena na pozadina</h1>
+<input type="radio" class="type" name="pozadina" value="color"/>
+<label>Color</label>
+<input type="radio" class="type" name="pozadina" value="image"/>
+<label>Image</label><br>
+<label>Value :</label>
+<input type="text" id="boja"><br>
+<button onclick="promeni()">Promeni</button>
+</div>
+</body>
+</html>
