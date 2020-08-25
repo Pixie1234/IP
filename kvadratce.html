@@ -1,0 +1,89 @@
+<!-- Vtor kolokvium, 4 kopcinja left right up down i change color.
+HTML elementite trebase so js da se dodadat.
+Ima edno kvadratce na pocetok vo crvena boja. So change color se menuva,
+ako e crvena vo zelena, ako e zelena vo sina i ako e sina vo crvena.
+Mislam trebase pozicijata i bojata da se cuvaat vo cookie. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery-3.2.1.min.js"></script>
+
+</head>
+<body>
+<script>
+//kopce color
+    var color= document.createElement("button");
+    color.innerHTML="COLOR";
+    color.setAttribute("id", "color");
+    document.body.appendChild(color);
+//kopce left
+    var left= document.createElement("button");
+    left.innerHTML="LEFT";
+    left.setAttribute("id", "left");
+    document.body.appendChild(left);
+//kopce right
+    var right= document.createElement("button");
+    right.innerHTML="RIGHT";
+    right.setAttribute("id", "right");
+    document.body.appendChild(right);
+//kopce up
+    var up= document.createElement("button");
+    up.innerHTML="UP";
+    up.setAttribute("id", "up");
+    document.body.appendChild(up);
+//kopce down
+    var down= document.createElement("button");
+    down.innerHTML="DOWN";
+    down.setAttribute("id", "down");
+    document.body.appendChild(down);
+
+    //Ima edno kvadratce na pocetok vo crvena boja
+    var div= document.createElement("div");
+    div.setAttribute("id","kvadratce");
+    div.style.height = "60px";
+    div.style.width = "100px";
+    div.style.margin= "100px";
+    div.style.backgroundColor= "green";
+    document.body.appendChild(div);
+
+    $("#up").click(function () {
+        $("#kvadratce").css({
+            marginTop: "-=10px"
+        });
+    });
+    $("#down").click(function () {
+        $("#kvadratce").css({
+            marginTop: "+=10px"
+        });
+    });
+    $("#left").click(function () {
+        $("#kvadratce").css({
+            marginLeft: "-=10px"
+        });
+    });
+    $("#right").click(function () {
+        $("#kvadratce").css({
+            marginLeft: "+=10px"
+        });
+    });
+    $("#color").click(function () {
+        if (div.style.backgroundColor === "green") {
+
+            div.style.backgroundColor = "red";
+        }
+        else if (div.style.backgroundColor === "red") {
+
+            div.style.backgroundColor = "blue";
+        } else {
+            div.style.backgroundColor= "green";
+        }
+
+    });
+
+
+
+</script>
+</body>
+</html>
