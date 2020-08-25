@@ -1,39 +1,101 @@
-<!--избриши даден број кој се наога во листата. Да се напише функција во JavaScript која како аргумент прима листа и елемент. 
-Функцијата треба да врати нова листа, каде дадениот елемент е избришан од оригиналната листа:
-Пример:
-console.log(remove_array_element([2, 5, 9, 6], 5));
-[2, 9, 6]
---><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script>
-        function izbrisiElement(lista, elem) {
-            //var broj = document.getElementById("broj").value;
+    <script src="../jquery-3.2.1.min.js"></script>
 
-            var niza = [];
-            console.log(lista.length);//ako ima 5 cifri ke vrate 5
-
-            for (let i = 0; i < lista.length; i++) {
-                if (lista[i] !== elem) {
-                    niza.push(lista[i]);
-                } else if (lista[i]===elem) {
-                    continue;
-                }
-            }
-            console.log(niza);
-            return niza;
-        }
-
-        lista = izbrisiElement([2, 3, 4, 5, 9, 5 ], 5);
-        lista1 = izbrisiElement([2, 5, 9, 6], 5);
-        //document.write(lista.toString());
-        //console.log(izbrisiElement([2, 3, 4, 5, 5, 9], 5));
-    </script>
+<!--Mora da e vo body <script>-->
 </head>
 <body>
-<input type="text" id="broj">
-<button onclick="izbrisiElement()">Click</button>
+<script>
+    var x = document.createTextNode("X: ");
+    document.body.appendChild(x);
+    var input = document.createElement("input");
+    input.setAttribute("type", "text");
+    input.setAttribute("id", "x");
+    document.body.appendChild(input);
+
+    document.body.appendChild(document.createElement("br"));
+
+    var y = document.createTextNode("Y: ");
+    document.body.appendChild(y);
+    var input2 = document.createElement("input");
+    input2.setAttribute("type", "text");
+    input2.setAttribute("id", "y");
+    document.body.appendChild(input2);
+
+    document.body.appendChild(document.createElement("br"));
+//input-rotacija
+    var rotacija = document.createTextNode("Rotacija: ");
+    document.body.appendChild(rotacija);
+    var input3 = document.createElement("input");
+    input3.setAttribute("type", "text");
+    input3.setAttribute("id", "rotacija");
+    document.body.appendChild(input3);
+    //kopce1
+    document.body.appendChild(document.createElement("br"));
+
+    var kopce1 = document.createElement("input");
+    kopce1.setAttribute("type", "button");
+    kopce1.setAttribute("value", "To Json");
+    kopce1.setAttribute("id", "json");
+    document.body.appendChild(kopce1);
+//kopce2
+    document.body.appendChild(document.createElement("br"));
+
+    var kopce2 = document.createElement("input");
+    kopce2.setAttribute("type", "button");
+    kopce2.setAttribute("value", "Animate");
+    kopce2.setAttribute("id", "animate");
+    document.body.appendChild(kopce2);
+
+    document.body.appendChild(document.createElement("br"));
+    document.body.appendChild(document.createElement("br"));
+
+//div
+    var div = document.createElement('div');
+    div.style.backgroundColor = "yellow";
+    div.style.width = "50px";
+    div.style.height = "50px";
+    div.setAttribute("id", "dvizi");
+    document.body.appendChild(div);
+
+    /*sea otkako ova ke se loadira pisuvame jquery*/
+    $(document).ready(function () {
+        $("#animate").click(function () {
+
+            let x = document.getElementById("x").value;
+            let y = document.getElementById("y").value;
+            let rotacija = document.getElementById("rotacija").value;
+
+            if (x=="" ||  y=="" || rotacija =="") {
+                alert("Site policnja se zadolzitelni!!!");
+                return;
+            }
+                // za da mu napraeme animacija na kvadratot go zimame negovoto id
+            $("#dvizi").animate({
+                top : "+="+parseInt(x),
+                left : "+="+parseInt(y)
+            }, 2500);
+
+            $("#dvizi").css({
+                transform : "rotate(" + rotacija + "deg)"
+            })
+        });
+
+        $("#json").click(function () {
+
+            let obj = new Object();
+            obj.x = document.getElementById("x").value;
+            obj.y = document.getElementById("y").value;
+            obj.rotation = document.getElementById("rotacija").value;
+            let str = JSON.stringify(obj);
+            console.log(str);
+
+        })
+    })
+
+</script>
 </body>
 </html>
