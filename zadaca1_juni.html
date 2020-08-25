@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<input type="text" id="number">
+<button onclick="left()">></button>
+<button onclick="right()"><</button>
+<button onclick="flip()">FLIP</button>
+<button onclick="check()">CHECK</button>
+<button onclick="store()">STORE</button>
+<div id="sovrsen"></div>
+<ul id="lista">
+
+</ul>
+<script>
+    var input = document.getElementById('number');
+
+    function left() {
+        //poslednite 2 cifri doagaat prvi
+        //console.log(input.length);
+        var input = document.getElementById('number');
+        var number= input.value.slice(0,8);
+        var last2digits = input.value.slice(8);
+        console.log(number);
+        console.log(last2digits);
+        var number = last2digits +number;
+        console.log(number);
+        document.getElementById("number").value = number;
+    }
+ //prvite 2 cifri doagaat posledni
+    function right() {
+        var input = document.getElementById('number');
+        input=input.value;
+        var first2digits= input.slice(0,2);
+        var number = input.slice(2);
+        console.log(first2digits);
+        console.log(number);
+        var number = number+first2digits;
+        console.log(number);
+        document.getElementById("number").value = number;
+    }
+/*convert brojo se transformira taka so od sekoja negova cifra
+ se odzema 2 (dokolku rez e negativen se odzema 10)
+*/
+    function flip() {
+        var input = document.getElementById('number');
+        input=input.value;
+        var number=0;
+        var result ="";//ako e string ne rabote + i - kako so broj, no rabote concat za da se spojat lesno
+        //tuka mora da raboteme so broevite kako so int a ne kako so string, iako so string ako go zememe imame poveke opcii i polesno
+        for (let i = 0; i <input.length; i++) {
+            //console.log(input[i]);
+            if (input[i] - 2 < 0) {
+                number = input[i]-10;
+            }
+            else number = input[i]-2;
+            result= result.concat(number);
+            console.log(number);
+        }
+        console.log(result);
+    }
+    //dali e sovrsen(onoj koj ima barem 3 cifri delivi so 3
+    function check() {
+        var input = document.getElementById('number');
+        input = input.value;
+        console.log(input);
+        var count = 0;
+        for (let i = 0; i < input.length; i++) {
+            if (input[i] % 3 === 0) {
+                count++;
+            }
+            if (count >= 3) {
+                document.getElementById("sovrsen").innerHTML = "Sovrsen";
+            }
+        }
+    }
+        //brojot se brise od tekstualnoto pole i se dodava vo lista pod poleto
+        //vo ovaa lista se dodavaat site zacuvani broevi
+        function store() {
+            var input = document.getElementById('number').value;
+            var ul = document.getElementById("lista");
+            var li = document.createElement('li');
+
+            li.innerHTML=input;
+            ul.appendChild(li);
+
+    }
+</script>
+</body>
+</html>
